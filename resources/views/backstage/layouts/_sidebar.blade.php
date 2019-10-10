@@ -1,3 +1,5 @@
+<!-- Left side column. contains the logo and sidebar -->
+
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -38,6 +40,24 @@
                     <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
             </li>
+            {{--            Anime start--}}
+
+            <li class="active treeview menu-open">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Animation</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('backstage.anime.index') }}"><i class="fa fa-circle-o"></i> Show all</a></li>
+                    <li><a href="{{ route('backstage.anime.create') }}"><i class="fa fa-circle-o"></i> Create a new</a></li>
+                </ul>
+            </li>
+            {{--            Anime end--}}
+
+
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>

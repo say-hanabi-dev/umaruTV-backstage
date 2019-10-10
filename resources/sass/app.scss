@@ -5,7 +5,7 @@
 @import 'variables';
 
 // Bootstrap
-//@import '~bootstrap';
+//@import '~bootstrap/dist/css/bootstrap.min.css';
 
 //@import "~bootstrap/dist/css/bootstrap.css";
 //@import "~bootstrap/dist/css/bootstrap-grid.css";
@@ -21,3 +21,8 @@
 @import "~ionicons/dist/css/ionicons.min.css";
 @import "~jvectormap/jquery-jvectormap.css";
 
+
+.cover{
+  display: block;
+  margin: 10px 0;
+}

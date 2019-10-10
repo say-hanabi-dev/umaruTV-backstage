@@ -3094,3 +3094,8 @@
   clip: auto;
 }
 
+.cover {
+  display: block;
+  margin: 10px 0;
+}
+

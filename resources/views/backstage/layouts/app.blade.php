@@ -5,18 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>@yield('title') - {{ config('app.name') }}</title>
     <!-- Bootstrap 3.3.7 -->
+{{--    TODO:: app.less use bootstrap--}}
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <script src="{{ asset('/js/app.js') }}"></script>
+    <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     @include('backstage.layouts._header')
 
-    <!-- Left side column. contains the logo and sidebar -->
     @include('backstage.layouts._sidebar')
 
     <!-- Content Wrapper. Contains page content -->
@@ -35,7 +38,10 @@
 
         <!-- Main content -->
         <section class="content">
-            content
+            <div id="app" class="row {{route_class()}}-page">
+                @include("backstage.layouts._message")
+                @yield('content')
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -68,5 +74,12 @@
 {{--<!-- AdminLTE for demo purposes -->--}}
 {{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/demo.js"></script>--}}
 
+<script>
+
+    $('#datepicker').datepicker({
+        autoclose: true,
+        format:'yyyy-mm-dd',
+    })
+</script>
 </body>
 </html>

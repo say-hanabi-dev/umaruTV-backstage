@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/backstage/',function (){
-    return view('backstage.index');
+Route::prefix('')->namespace('Backstage')->as('backstage.')->group(function (){
+    Route::resource('anime','AnimesController');
 });

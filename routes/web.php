@@ -18,4 +18,7 @@ Route::get('/', function () {
 });
 Route::prefix('')->namespace('Backstage')->as('backstage.')->group(function (){
     Route::resource('anime','AnimesController');
+    Route::resource('episode','EpisodeController');
+    Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
+//    Route::get('anime/episode/{id}','EpisodeController@index')->name('episode.index');
 });

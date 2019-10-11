@@ -33,6 +33,7 @@
                                 <form id="delete-{{ $episode->id }}" method="post" action="{{ route('backstage.episode.destroy',$episode->id) }}" hidden>
                                     {{ method_field('delete') }}
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="anime_id" value="{{ $anime->id }}">
                                 </form>
                             </td>
                         </tr>

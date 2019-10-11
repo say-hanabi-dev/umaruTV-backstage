@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backstage;
 
+use App\Http\Type\EmptyType;
 use App\Models\Anime;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -26,9 +27,11 @@ class EpisodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $anime = Anime::findOrFail($id);
+        $episode = new EmptyType();
+        return view('backstage.episode.create_edit',compact('episode','anime'));
     }
 
     /**
@@ -39,7 +42,16 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'anime_id'=>'required|exists:animes,id',
+            'name'=>'required|max:30',
+            'ranking'=>'required|integer'
+        ]);
+        Video::create($request->all());
+        $row = Anime::where('id',$request->anime_id)->increment('episodes');
+        return redirect()
+            ->route('backstage.episode.index',$request->anime_id)
+            ->with('message','Create successfully, Affected '.($row+1).' line');
     }
 
     /**
@@ -61,7 +73,8 @@ class EpisodeController extends Controller
      */
     public function edit(Video $episode)
     {
-        return view('backstage.episode.create_edit',compact('episode'));
+        $anime = $episode->anime;
+        return view('backstage.episode.create_edit',compact('episode','anime'));
     }
 
     /**
@@ -73,7 +86,19 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|max:30',
+            'ranking'=>'required|integer'
+        ]);
+
+        $episode = new Video();
+        $fillable = $episode->getFillable();
+        $date = array_filter($request->all(),function ($key)use($fillable){
+            return in_array($key,$fillable);
+        },ARRAY_FILTER_USE_KEY);
+
+        $row = $episode::where('id',$id)->update($date);
+        return back()->with('message',"Update successfully, Affected $row line");
     }
 
     /**

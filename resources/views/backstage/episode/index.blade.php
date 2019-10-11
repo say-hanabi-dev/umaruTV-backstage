@@ -5,6 +5,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">{{$anime->name}}</h3>
+            <a href="{{ route('backstage.episode.create',$anime->id) }}" class="btn btn-primary pull-right">Add a new episode to the animation: {{$anime->name}}</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

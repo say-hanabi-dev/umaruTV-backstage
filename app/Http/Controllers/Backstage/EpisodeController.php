@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backstage;
 
 use App\Http\Type\EmptyType;
 use App\Models\Anime;
-use App\Models\Video;
+use App\Models\Episode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class EpisodeController extends Controller
     public function index($id)
     {
         $anime = Anime::findOrFail($id);
-        $episodes = Video::where('anime_id',$id)->paginate(15);
+        $episodes = Episode::where('anime_id',$id)->paginate(15);
         return view('backstage.episode.index',compact('episodes','anime'));
     }
 
@@ -47,7 +47,7 @@ class EpisodeController extends Controller
             'name'=>'required|max:30',
             'ranking'=>'required|integer'
         ]);
-        Video::create($request->all());
+        Episode::create($request->all());
         $row = Anime::where('id',$request->anime_id)->increment('episodes');
         return redirect()
             ->route('backstage.episode.index',$request->anime_id)
@@ -68,10 +68,10 @@ class EpisodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Video  $episode
+     * @param  Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video $episode)
+    public function edit(Episode $episode)
     {
         $anime = $episode->anime;
         return view('backstage.episode.create_edit',compact('episode','anime'));
@@ -91,7 +91,7 @@ class EpisodeController extends Controller
             'ranking'=>'required|integer'
         ]);
 
-        $episode = new Video();
+        $episode = new Episode();
         $fillable = $episode->getFillable();
         $date = array_filter($request->all(),function ($key)use($fillable){
             return in_array($key,$fillable);
@@ -109,7 +109,7 @@ class EpisodeController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $row = Video::destroy($id);
+        $row = Episode::destroy($id);
         $row += Anime::where('id',$request->anime_id)->decrement('episodes');
         return back()->with('message',"Delete successfully, Affected $row line");
     }

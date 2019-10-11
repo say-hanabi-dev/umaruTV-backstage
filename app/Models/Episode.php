@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Episode extends Model
 {
     protected $fillable = ['name','ranking','info','coin','anime_id'];
+    protected $table = 'videos';
     
     public function resource()
     {

@@ -12,7 +12,7 @@ class Anime extends Model
     
     public function video()
     {
-    	return $this->hasMany(Video::class,'anime_id');
+    	return $this->hasMany(Episode::class,'anime_id');
     }
 
     public function tags()

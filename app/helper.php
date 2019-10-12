@@ -13,3 +13,8 @@ if (!function_exists('route_class')){
         return str_replace('.','-',Route::currentRouteName());
     }
 }
+function array_filter_key(array $input, array $key){
+    return array_filter($input,function ($i)use($key){
+        return in_array($i,$key);
+    },ARRAY_FILTER_USE_KEY);
+}

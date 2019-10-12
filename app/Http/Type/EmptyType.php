@@ -15,6 +15,6 @@ class EmptyType{
 
     public function __toString()
     {
-        return '';
+        return implode(', ',$this->date);
     }
 }

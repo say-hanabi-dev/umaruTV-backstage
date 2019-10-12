@@ -80,8 +80,9 @@ class EpisodeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @param Episode $episode
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,13 +92,7 @@ class EpisodeController extends Controller
             'ranking'=>'required|integer'
         ]);
 
-        $episode = new Episode();
-        $fillable = $episode->getFillable();
-        $date = array_filter($request->all(),function ($key)use($fillable){
-            return in_array($key,$fillable);
-        },ARRAY_FILTER_USE_KEY);
-
-        $row = $episode::where('id',$id)->update($date);
+        $row = Episode::where('id',$id)->update_filter($request->all());
         return back()->with('message',"Update successfully, Affected $row line");
     }
 

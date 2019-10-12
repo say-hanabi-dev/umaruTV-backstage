@@ -83,9 +83,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    @if(request()->header('referer'))
-                        <a href="{{ request()->header('referer') }}" type="submit" class="btn btn-default">Cancel</a>
-                    @endif
+                    @back(['route'=>route('backstage.anime.index')]) @endback
                     <button type="submit" class="btn btn-primary pull-right">Sublime</button>
                 </div>
             </form>

@@ -41,7 +41,6 @@ class AnimesController extends Controller
      */
     public function store(AnimeRequest $request)
     {
-//        dd($request->all());
         $request->validate([
             'cover' => 'required'
         ]);
@@ -75,6 +74,7 @@ class AnimesController extends Controller
      */
     public function edit($id)
     {
+
         $anime = Anime::findOrFail($id);
         return view('backstage.anime.create_edit',compact('anime'));
     }
@@ -84,22 +84,18 @@ class AnimesController extends Controller
      *
      * @param  AnimeRequest  $AnimeRequest
      * @param  int  $id
+     * @param Anime $anime
      * @return \Illuminate\Http\Response
      */
     public function update(AnimeRequest $request, $id)
     {
         $anime = new Anime();
-        $fillable = $anime->getFillable();
-
-        $req = array_filter($request->all(),function ($key)use($fillable){
-            return in_array($key,$fillable);
-        },ARRAY_FILTER_USE_KEY);
 
         if($request->hasFile('cover')){
             $rst = $request->file('cover')->store('','public');
-            $req['cover'] = "/storage/$rst";
+            $request->merge(['cover'=> "/storage/$rst"]);
         }
-        $rest = Anime::where('id',$id)->update($req);
+        $rest = Anime::where('id',$id)->update_filter($request->all());
         return back()->with('message',"Update successfully, Affected $rest line");
     }
 

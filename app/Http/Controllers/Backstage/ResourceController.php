@@ -78,19 +78,14 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ResourceRequest $request
+     * @param int $id
+     * @param Resource $resource
      * @return \Illuminate\Http\Response
      */
     public function update(ResourceRequest $request, $id)
     {
-        $resource = new Resource();
-        $fillable = $resource->getFillable();
-        $date = array_filter($request->all(),function ($key)use($fillable){
-            return in_array($key,$fillable);
-        },ARRAY_FILTER_USE_KEY);
-
-        $row = Resource::where('id',$id)->update($date);
+        $row = Resource::where('id',$id)->update_filter($request->all());
         return back()->with('message',"Update successfully, Affected $row line");
     }
 

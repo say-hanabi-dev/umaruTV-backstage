@@ -19,7 +19,7 @@ class AnimesController extends Controller
     public function index()
     {
         $animes = Anime::paginate(20);
-        return view('backstage.anime.index',compact('animes'));
+        return view('backstage.anime.show',compact('animes'));
     }
 
     /**

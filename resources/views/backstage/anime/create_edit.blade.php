@@ -92,3 +92,11 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <script>
+        $('#datepicker').datepicker({
+            autoclose: true,
+            format:'yyyy-mm-dd',
+        })
+    </script>
+@endsection

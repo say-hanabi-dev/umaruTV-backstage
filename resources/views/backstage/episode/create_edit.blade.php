@@ -10,7 +10,7 @@
 
             <div class="box-header with-border">
                 @if($episode->id)
-                    <h3 class="box-title"><i class="fa fa-edit"></i> Edit</h3>
+                    <h3 class="box-title"><i class="fa fa-edit"></i> Edit {{$anime->name}}'s {{$episode->name}}</h3>
                 @else
                     <h3 class="box-title"><i class="fa fa-edit"></i> Create new episode to the {{ $anime->name }}</h3>
                 @endif

@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$anime->name}}</h3>
+                <h3 class="box-title">Animation: {{$anime->name}}</h3>
             <a href="{{ route('backstage.episode.create',$anime->id) }}" class="btn btn-primary pull-right">Add a new episode to the animation: {{$anime->name}}</a>
             </div>
             <!-- /.box-header -->
@@ -28,7 +28,7 @@
                             <td><span class="badge bg-blue">{{ $episode->resource->count() }}</span></td>
                             <td>
                                 <a href="{{ route('backstage.episode.edit',$episode->id) }}" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
-{{--                                <a href="{{ route('backstage.episode.index',$episode->id) }}" class="btn btn-primary">View episode</a>--}}
+                                <a href="{{ route('backstage.resource.index',$episode->id) }}" class="btn btn-primary">View Resource</a>
                                 <button class="btn btn-danger" onclick="$('#delete-{{ $episode->id }}').submit()"><i class="fa fa-trash-o"></i> Delete</button>
                                 <form id="delete-{{ $episode->id }}" method="post" action="{{ route('backstage.episode.destroy',$episode->id) }}" hidden>
                                     {{ method_field('delete') }}
@@ -42,6 +42,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
+                @back(['route'=>route('backstage.anime.index')]) @slot('show') Back @endslot @endback
                 {{ $episodes->links() }}
             </div>
         </div>

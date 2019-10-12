@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Backstage;
 
-use App\Http\Type\EmptyType;
-use App\Models\Anime;
-use App\Models\Episode;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResourceRequest;
+use App\Http\Type\EmptyType;
+use App\Models\Episode;
+use App\Models\Resource;
+use Illuminate\Http\Request;
 
-class EpisodeController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,10 @@ class EpisodeController extends Controller
      */
     public function index($id)
     {
-        $anime = Anime::findOrFail($id);
-        $episodes = Episode::where('anime_id',$id)->paginate(15);
-        return view('backstage.episode.show',compact('episodes','anime'));
+        $episode = Episode::findOrFail($id);
+        $anime = $episode->anime;
+        $resources = Resource::where('video_id',$id)->get();
+        return view('backstage.resource.show',compact('resources','anime','episode'));
     }
 
     /**
@@ -29,9 +31,10 @@ class EpisodeController extends Controller
      */
     public function create($id)
     {
-        $anime = Anime::findOrFail($id);
-        $episode = new EmptyType();
-        return view('backstage.episode.create_edit',compact('episode','anime'));
+        $episode = Episode::findOrFail($id);
+        $anime = $episode->anime;
+        $resource = new EmptyType();
+        return view('backstage.resource.create_edit',compact('episode','anime','resource'));
     }
 
     /**
@@ -40,18 +43,11 @@ class EpisodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResourceRequest $request)
     {
-        $request->validate([
-            'anime_id'=>'required|exists:animes,id',
-            'name'=>'required|max:30',
-            'ranking'=>'required|integer'
-        ]);
-        Episode::create($request->all());
-        $row = Anime::where('id',$request->anime_id)->increment('episodes');
-        return redirect()
-            ->route('backstage.episode.index',$request->anime_id)
-            ->with('message','Create successfully, Affected '.($row+1).' line');
+//        dd($request->all());
+        Resource::create($request->all());
+        return redirect()->route('backstage.resource.index',$request->video_id)->with('message','Create successfully, Affected 1 line');
     }
 
     /**
@@ -68,13 +64,15 @@ class EpisodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Episode  $episode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Episode $episode)
+    public function edit($id)
     {
+        $resource = Resource::findOrFail($id);
+        $episode = $resource->episode;
         $anime = $episode->anime;
-        return view('backstage.episode.create_edit',compact('episode','anime'));
+        return view('backstage.resource.create_edit',compact('resource','episode','anime'));
     }
 
     /**
@@ -84,20 +82,15 @@ class EpisodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ResourceRequest $request, $id)
     {
-        $request->validate([
-            'name'=>'required|max:30',
-            'ranking'=>'required|integer'
-        ]);
-
-        $episode = new Episode();
-        $fillable = $episode->getFillable();
+        $resource = new Resource();
+        $fillable = $resource->getFillable();
         $date = array_filter($request->all(),function ($key)use($fillable){
             return in_array($key,$fillable);
         },ARRAY_FILTER_USE_KEY);
 
-        $row = $episode::where('id',$id)->update($date);
+        $row = Resource::where('id',$id)->update($date);
         return back()->with('message',"Update successfully, Affected $row line");
     }
 
@@ -107,10 +100,15 @@ class EpisodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
-        $row = Episode::destroy($id);
-        $row += Anime::where('id',$request->anime_id)->decrement('episodes');
+        $row = Resource::destroy($id);
         return back()->with('message',"Delete successfully, Affected $row line");
+    }
+
+    public function player(Request $request){
+        return view('backstage.resource.player',[
+            'url'=>$request->url
+        ]);
     }
 }

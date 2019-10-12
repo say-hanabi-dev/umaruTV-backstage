@@ -21,5 +21,10 @@ Route::prefix('')->namespace('Backstage')->as('backstage.')->group(function (){
     Route::resource('episode','EpisodeController');
     Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
     Route::get('anime/{id}/episode/create','EpisodeController@create')->name('episode.create');
+    Route::resource('resource','ResourceController');
+    Route::get('episode/{id}/resource','ResourceController@index')->name('resource.index');
+    Route::get('episode/{id}/resource/create','ResourceController@create')->name('resource.create');
+    Route::get('episode/resource/player','ResourceController@player')->name('resource.player');
+
 //    Route::get('anime/episode/{id}','EpisodeController@index')->name('episode.index');
 });

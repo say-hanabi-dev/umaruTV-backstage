@@ -6,15 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - {{ config('app.name') }}</title>
-    <!-- Bootstrap 3.3.7 -->
-{{--    TODO:: app.less use bootstrap--}}
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <script src="{{ asset('/js/app.js') }}"></script>
-    <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @include("backstage.layouts._css")
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -55,31 +47,6 @@
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
-
-
-{{--<!-- FastClick -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/bower_components/fastclick/lib/fastclick.js"></script>--}}
-
-{{--<!-- Sparkline -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}
-{{--<!-- jvectormap  -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>--}}
-{{--<!-- SlimScroll -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>--}}
-{{--<!-- ChartJS -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/bower_components/chart.js/Chart.js"></script>--}}
-{{--<!-- AdminLTE dashboard demo (This is only for demo purposes) -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/pages/dashboard2.js"></script>--}}
-{{--<!-- AdminLTE for demo purposes -->--}}
-{{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/demo.js"></script>--}}
-
-<script>
-
-    $('#datepicker').datepicker({
-        autoclose: true,
-        format:'yyyy-mm-dd',
-    })
-</script>
+@include('backstage.layouts._js')
 </body>
 </html>

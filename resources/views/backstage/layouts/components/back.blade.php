@@ -1,5 +1,5 @@
-@if(!empty($route))
-    <a href="{{ $route }}" type="submit" class="btn btn-default">Cancel</a>
-@else
-    <a href="{{ request()->header('referer') }}" type="submit" class="btn btn-default">Cancel</a>
-@endif
+@php
+    $show = empty($show)?'Cancel':$show;
+    $route = empty($route)?request()->header('referer'):$route
+@endphp
+<a href="{{ $route }}" type="submit" class="btn btn-default">{{$show}}</a>

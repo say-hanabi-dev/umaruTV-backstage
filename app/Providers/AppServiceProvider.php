@@ -25,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::component('backstage.layouts.components.back','back');
+        Blade::component('backstage.layouts.components.error','showError');
+        Blade::component('backstage.layouts.components.input','input');
+        Blade::component('backstage.layouts.components.select','select');
+        Blade::component('backstage.layouts.components.option','option');
+
     }
 }

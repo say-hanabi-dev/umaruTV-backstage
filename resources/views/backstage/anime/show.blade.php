@@ -1,10 +1,11 @@
 @extends("backstage.layouts.app")
 @section('title','Animation view')
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-9">
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Animation view</h3>
+                <a class="btn btn-primary pull-right" href="{{ route('backstage.anime.create') }}">Add a new animation</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -50,5 +51,8 @@
                 {{--                </ul>--}}
             </div>
         </div>
+    </div>
+    <div class="col-md-3">
+        {!! $animes->filterView() !!}
     </div>
 @endsection

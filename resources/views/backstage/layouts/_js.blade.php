@@ -14,4 +14,4 @@
 {{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/pages/dashboard2.js"></script>--}}
 {{--<!-- AdminLTE for demo purposes -->--}}
 {{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/demo.js"></script>--}}
-@yield('js')
+@stack('js')

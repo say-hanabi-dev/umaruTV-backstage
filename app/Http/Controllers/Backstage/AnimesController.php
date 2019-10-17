@@ -18,7 +18,11 @@ class AnimesController extends Controller
      */
     public function index()
     {
-        $animes = Anime::paginate(20);
+//        $animes = new Anime();
+//        $animes->buildFilter();
+
+        $animes = Anime::filter()->paginate(20);
+        dd($animes);
         return view('backstage.anime.show',compact('animes'));
     }
 
@@ -90,7 +94,7 @@ class AnimesController extends Controller
     public function update(AnimeRequest $request, $id)
     {
         $anime = new Anime();
-
+    
         if($request->hasFile('cover')){
             $rst = $request->file('cover')->store('','public');
             $request->merge(['cover'=> "/storage/$rst"]);

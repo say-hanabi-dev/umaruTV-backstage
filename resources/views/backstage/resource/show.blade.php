@@ -63,15 +63,15 @@
     </div>
 
 @endsection
-@section('css')
+@push('css')
     <style>
         #player{
             width: 100%;
             height: 100%;
         }
     </style>
-@endsection
-@section('js')
+@endpush
+@push('js')
     <script>
         function play(url) {
             url = '{{route('backstage.resource.player')}}?url='+url
@@ -81,4 +81,4 @@
             console.log('11111')
         })
     </script>
-@endsection
+@endpush

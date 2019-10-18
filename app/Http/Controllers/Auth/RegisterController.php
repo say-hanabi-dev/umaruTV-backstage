@@ -74,17 +74,17 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        if (!User::all(1)->toArray()){
-            return redirect()->route('login');
-        }
+//        if (User::all(1)->toArray()){
+//            return redirect()->route('login');
+//        }
         return view('auth.register');
     }
 
     public function register(Request $request)
     {
-        if (!User::all(1)->toArray()){
-            return redirect()->route('login');
-        }
+//        if (User::all(1)->toArray()){
+//            return redirect()->route('login');
+//        }
 
         $this->validator($request->all())->validate();
 

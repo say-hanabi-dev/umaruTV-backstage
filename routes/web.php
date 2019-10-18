@@ -12,11 +12,14 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::prefix('')->namespace('Backstage')->as('backstage.')->group(function (){
+Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')->group(function (){
     Route::resource('anime','AnimesController');
     Route::resource('episode','EpisodeController');
     Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
@@ -28,3 +31,5 @@ Route::prefix('')->namespace('Backstage')->as('backstage.')->group(function (){
 
 //    Route::get('anime/episode/{id}','EpisodeController@index')->name('episode.index');
 });
+
+Route::get('/home', 'HomeController@index')->name('home');

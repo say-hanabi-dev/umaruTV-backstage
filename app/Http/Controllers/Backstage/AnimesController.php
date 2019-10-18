@@ -96,7 +96,7 @@ class AnimesController extends Controller
             $request->merge(['cover'=> "/storage/$rst"]);
         }
         $rest = Anime::where('id',$id)->update_filter($request->all());
-        return back()->with('message',"Update successfully, Affected $rest line");
+        return back()->with('success',"Update successfully, Affected $rest line");
     }
 
     /**
@@ -107,6 +107,6 @@ class AnimesController extends Controller
      */
     public function destroy($id){
         $rest = Anime::destroy($id);
-        return back()->with('message',"Delete successfully, Affected $rest line");
+        return back()->with('success',"Delete successfully, Affected $rest line");
     }
 }

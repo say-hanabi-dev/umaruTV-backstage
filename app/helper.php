@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Backstage\Setting;
+
 if (!function_exists('')){
     function choose_value(...$args){
         foreach ($args as $arg) {
@@ -17,4 +20,7 @@ function array_filter_key(array $input, array $key){
     return array_filter($input,function ($i)use($key){
         return in_array($i,$key);
     },ARRAY_FILTER_USE_KEY);
+}
+function setting($key,$value = null){
+    return Setting::setting($key,$value);
 }

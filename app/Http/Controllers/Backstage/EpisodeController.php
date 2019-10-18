@@ -51,7 +51,7 @@ class EpisodeController extends Controller
         $row = Anime::where('id',$request->anime_id)->increment('episodes');
         return redirect()
             ->route('backstage.episode.index',$request->anime_id)
-            ->with('message','Create successfully, Affected '.($row+1).' line');
+            ->with('success','Create successfully, Affected '.($row+1).' line');
     }
 
     /**
@@ -93,7 +93,7 @@ class EpisodeController extends Controller
         ]);
 
         $row = Episode::where('id',$id)->update_filter($request->all());
-        return back()->with('message',"Update successfully, Affected $row line");
+        return back()->with('success',"Update successfully, Affected $row line");
     }
 
     /**
@@ -106,6 +106,6 @@ class EpisodeController extends Controller
     {
         $row = Episode::destroy($id);
         $row += Anime::where('id',$request->anime_id)->decrement('episodes');
-        return back()->with('message',"Delete successfully, Affected $row line");
+        return back()->with('success',"Delete successfully, Affected $row line");
     }
 }

@@ -6,10 +6,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{asset('storage/ZqM7iaP4CR.png')}}" class="img-circle" alt="User Image">
+                <img src="{{asset(setting('avatar'))}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>{{ ucfirst(auth()->user()->name)  }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -44,6 +44,19 @@
             </li>
             {{--            Anime end--}}
 
+            <!-- Setting start -->
+            <li>
+                <a href="{{ route('backstage.setting') }}">
+                    <i class="fa fa-gears"></i> <span>Setting</span>
+                    <span class="pull-right-container">
+{{--                        <small class="label pull-right bg-green">new</small>--}}
+{{--                        <i class="fa fa-angle-left pull-right"></i>--}}
+                    </span>
+                </a>
+            </li>
+            <!-- Setting end -->
+
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
@@ -63,8 +76,8 @@
                 <a href="pages/widgets.html">
                     <i class="fa fa-th"></i> <span>Widgets</span>
                     <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
+                        <small class="label pull-right bg-green">new</small>
+                    </span>
                 </a>
             </li>
 

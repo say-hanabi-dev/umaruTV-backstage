@@ -47,7 +47,7 @@ class ResourceController extends Controller
     {
 //        dd($request->all());
         Resource::create($request->all());
-        return redirect()->route('backstage.resource.index',$request->video_id)->with('message','Create successfully, Affected 1 line');
+        return redirect()->route('backstage.resource.index',$request->video_id)->with('success','Create successfully, Affected 1 line');
     }
 
     /**
@@ -86,7 +86,7 @@ class ResourceController extends Controller
     public function update(ResourceRequest $request, $id)
     {
         $row = Resource::where('id',$id)->update_filter($request->all());
-        return back()->with('message',"Update successfully, Affected $row line");
+        return back()->with('success',"Update successfully, Affected $row line");
     }
 
     /**
@@ -98,7 +98,7 @@ class ResourceController extends Controller
     public function destroy($id)
     {
         $row = Resource::destroy($id);
-        return back()->with('message',"Delete successfully, Affected $row line");
+        return back()->with('success',"Delete successfully, Affected $row line");
     }
 
     public function player(Request $request){

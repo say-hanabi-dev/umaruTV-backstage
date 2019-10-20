@@ -32,4 +32,12 @@ class AnimeRequest extends FormRequest
             'status'=>['required',Rule::in(['updating','end','stop'])]
         ];
     }
+
+    function saveCover(){
+        $time = date('Y/m');
+        if ($this->hasFile('cover_file')){
+            $rst =  $this->file('cover_file')->store('cover'.$time, 'public');
+            $this->merge(['cover'=> setting('upload_domain').'/storage/'.$rst]);
+        }
+    }
 }

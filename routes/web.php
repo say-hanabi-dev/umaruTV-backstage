@@ -29,8 +29,11 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
     Route::get('episode/{id}/resource/create','ResourceController@create')->name('resource.create');
     Route::get('episode/resource/player','ResourceController@player')->name('resource.player');
 
-    Route::get('setting','SettingController@index')->name('setting');
-    Route::post('setting','SettingController@save')->name('setting.save');
+    Route::resource('setting','SettingController');
+    Route::get('/setting','SettingController@index')->name('setting.index');
+    Route::get('/setting/create','SettingController@create')->name('setting.create');
+    Route::post('/setting','SettingController@store')->name('setting.store');
+    Route::post('/setting/update','SettingController@update')->name('setting.update');
     Route::post('setting/upload','SettingController@upload')->name('upload');
 });
 

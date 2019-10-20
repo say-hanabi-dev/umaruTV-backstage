@@ -7,6 +7,7 @@
             <div class="box-header with-border">
                 @if($anime->id)
                     <h3 class="box-title"><i class="fa fa-edit"></i> Edit</h3>
+                    <a href="{{ route('backstage.episode.index',$anime->id) }}" class="btn btn-primary pull-right">View Episode</a>
                 @else
                     <h3 class="box-title"><i class="fa fa-edit"></i> Create</h3>
                 @endif

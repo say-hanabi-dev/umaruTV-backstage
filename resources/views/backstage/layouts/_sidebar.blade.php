@@ -46,7 +46,7 @@
 
             <!-- Setting start -->
             <li>
-                <a href="{{ route('backstage.setting') }}">
+                <a href="{{ route('backstage.setting.index') }}">
                     <i class="fa fa-gears"></i> <span>Setting</span>
                     <span class="pull-right-container">
 {{--                        <small class="label pull-right bg-green">new</small>--}}

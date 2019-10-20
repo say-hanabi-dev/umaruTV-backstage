@@ -41,11 +41,8 @@ class AnimesController extends Controller
      */
     public function store(AnimeRequest $request)
     {
-        $cover = ['cover'=>''];
-        if ($request->hasFile('cover_file')){
-            $cover['cover'] = $request->file('cover_file')->store('', 'public');
-        }
-        $anime = Anime::create(array_merge($request->all(), $cover));
+        $request->saveCover();
+        $anime = Anime::create($request->all());
         return redirect()->route('backstage.anime.edit', $anime->id)->with('message', 'Create successfully,Affected 1 line');
     }
 
@@ -69,7 +66,6 @@ class AnimesController extends Controller
      */
     public function edit($id)
     {
-
         $anime = Anime::findOrFail($id);
         return view('backstage.anime.create_edit',compact('anime'));
     }
@@ -84,12 +80,7 @@ class AnimesController extends Controller
      */
     public function update(AnimeRequest $request, $id)
     {
-        $anime = new Anime();
-
-        if($request->hasFile('cover_file')){
-            $rst = $request->file('cover_file')->store('','public');
-            $request->merge(['cover'=> "/storage/$rst"]);
-        }
+        $request->saveCover();
         $rest = Anime::where('id',$id)->update_filter($request->all());
         return back()->with('success',"Update successfully, Affected $rest line");
     }

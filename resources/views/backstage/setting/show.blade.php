@@ -6,10 +6,11 @@
 
             <div class="box-header with-border">
                 <h3 class="box-title">Backstage Setting</h3>
+                <a class="btn btn-primary pull-right" href="{{ route('backstage.setting.create') }}">Add Settings</a>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" action="{{ route('backstage.setting.save') }}" enctype="multipart/form-data">
+            <form role="form" method="post" action="{{ route('backstage.setting.update') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="box-body">
                     @foreach($setting as $set)

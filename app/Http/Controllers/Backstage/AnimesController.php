@@ -18,7 +18,7 @@ class AnimesController extends Controller
      */
     public function index()
     {
-        $animes = Anime::paginate(20);
+        $animes = Anime::orderBy('id','desc')->paginate(20);
         return view('backstage.anime.show',compact('animes'));
     }
 
@@ -41,16 +41,11 @@ class AnimesController extends Controller
      */
     public function store(AnimeRequest $request)
     {
-        $request->validate([
-            'cover' => 'required'
-        ]);
-
-        $rst = $request->file('cover')->store('', 'public');
-
-        $anime = Anime::create(array_merge($request->all(), [
-            'cover' => "/storage/$rst"
-        ]));
-
+        $cover = ['cover'=>''];
+        if ($request->hasFile('cover_file')){
+            $cover['cover'] = $request->file('cover_file')->store('', 'public');
+        }
+        $anime = Anime::create(array_merge($request->all(), $cover));
         return redirect()->route('backstage.anime.edit', $anime->id)->with('message', 'Create successfully,Affected 1 line');
     }
 
@@ -91,8 +86,8 @@ class AnimesController extends Controller
     {
         $anime = new Anime();
 
-        if($request->hasFile('cover')){
-            $rst = $request->file('cover')->store('','public');
+        if($request->hasFile('cover_file')){
+            $rst = $request->file('cover_file')->store('','public');
             $request->merge(['cover'=> "/storage/$rst"]);
         }
         $rest = Anime::where('id',$id)->update_filter($request->all());

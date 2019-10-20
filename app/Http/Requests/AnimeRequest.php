@@ -28,7 +28,7 @@ class AnimeRequest extends FormRequest
             'name'=>'required|max:100',
             'introduction'=>'required',
             'release_time'=>'date',
-            'cover'=>'image',
+            'cover_file'=>'image',
             'status'=>['required',Rule::in(['updating','end','stop'])]
         ];
     }

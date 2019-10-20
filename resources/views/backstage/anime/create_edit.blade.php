@@ -34,7 +34,7 @@
 
                     <div class="form-group @error('name') has-error @enderror">
                         <label for="InputName">Name</label>
-                        <input type="text" name="name" class="form-control" id="InputName" placeholder="Enter Name" value="{{ $anime->name }}">
+                        <input type="text" name="name" class="form-control" id="InputName" placeholder="Enter Name" value="{{ ee(old('name'),$anime->name) }}">
                         @error('name')
                         <span class="help-block">{{ $message }}</span>
                         @enderror
@@ -45,7 +45,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="release_time" class="form-control pull-right" id="datepicker" value="{{ $anime->release_time }}">
+                            <input type="text" name="release_time" class="form-control pull-right" id="datepicker" value="{{ ee(old('release_time'),$anime->release_time) }}">
                         </div>
                         @error('release_time')
                         <span class="help-block">{{ $message }}</span>
@@ -65,17 +65,21 @@
                     </div>
                     <div class="form-group @error('introduction') has-error @enderror">
                         <label>Introduction</label>
-                        <textarea class="form-control" name="introduction" rows="3" placeholder="Enter ...">{{ $anime->introduction }}</textarea>
+                        <textarea class="form-control" name="introduction" rows="3" placeholder="Enter ...">{{ ee(old('introduction'),$anime->introduction) }}</textarea>
                         @error('name')
                         <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group @error('cover') has-error @enderror">
                         <label for="inputCover">Cover input</label>
+                        <input type="text" name="cover" class="form-control" id="InputName" placeholder="Enter Name" value="{{ ee(old('cover'),$anime->cover) }}">
+                        @error('name')
+                        <span class="help-block">{{ $message }}</span>
+                        @enderror
                         @if($anime->cover)
                             <img src="{{ asset($anime->cover) }}" class="img-thumbnail cover">
                         @endif
-                        <input type="file" name="cover" id="InputCover">
+                        <input type="file" name="cover_file" id="InputCover">
                         @error('cover')
                         <span class="help-block">{{ $message }}</span>
                         @enderror

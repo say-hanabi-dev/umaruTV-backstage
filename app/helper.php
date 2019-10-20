@@ -2,8 +2,8 @@
 
 use App\Models\Backstage\Setting;
 
-if (!function_exists('')){
-    function choose_value(...$args){
+if (!function_exists('ee')){
+    function ee(...$args){
         foreach ($args as $arg) {
             if (!empty($arg)){
                 return $arg;

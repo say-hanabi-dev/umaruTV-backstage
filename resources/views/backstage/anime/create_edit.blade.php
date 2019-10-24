@@ -15,12 +15,15 @@
             <!-- /.box-header -->
             <!-- form start -->
             @if($anime->id)
-                <form role="form" action="{{ route('backstage.anime.update',$anime->id) }}" method="post" enctype="multipart/form-data">
-                {{ method_field('PUT') }}
+                @php $route = route('backstage.anime.update',$anime->id)@endphp
             @else
-                <form role="form" action="{{ route('backstage.anime.store') }}" method="post" enctype="multipart/form-data">
+                @php $route = route('backstage.anime.store') @endphp
             @endif
+            <form role="form" action="{{ $route }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                @if($anime->id)
+                    {{ method_field('PUT') }}
+                @endif
                 <div class="box-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -31,7 +34,6 @@
                             </ul>
                         </div>
                     @endif
-
 
                     <div class="form-group @error('name') has-error @enderror">
                         <label for="InputName">Name</label>
@@ -71,9 +73,19 @@
                         <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label>Multiple</label>
+                        <select class="form-control select2" name="tag_id[]" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
+                            @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}" {{ $anime->tags->find($tag)?'selected':''}} >{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group @error('cover') has-error @enderror">
                         <label for="inputCover">Cover input</label>
-                        <input type="text" name="cover" class="form-control" id="InputName" placeholder="Enter Name" value="{{ ee(old('cover'),$anime->cover) }}">
+                        <input type="text" name="cover" class="form-control" id="InputName" placeholder="Enter File path" value="{{ ee(old('cover'),$anime->cover) }}">
                         @error('name')
                         <span class="help-block">{{ $message }}</span>
                         @enderror
@@ -95,8 +107,14 @@
         </div>
     </div>
 @endsection
+@section('css')
+    <link rel="stylesheet" href="{{ asset('./css/select2.min.css') }}">
+@endsection
 @section('js')
+    <script src="{{ asset('/js/select2.full.min.js') }}"></script>
     <script>
+        $('.select2').select2();
+
         $('#datepicker').datepicker({
             autoclose: true,
             format:'yyyy-mm-dd',

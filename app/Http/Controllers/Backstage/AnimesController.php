@@ -6,6 +6,8 @@ use App\Http\Requests\AnimeRequest;
 use App\Http\Type\EmptyType;
 use App\Models\Anime;
 use App\Http\Controllers\Controller;
+use App\Models\AnimeTag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +32,8 @@ class AnimesController extends Controller
      */
     public function create(EmptyType $anime)
     {
-        return view('backstage.anime.create_edit',compact('anime'));
+        $tags = Tag::all();
+        return view('backstage.anime.create_edit',compact('anime','tags'));
     }
 
     /**
@@ -43,7 +46,14 @@ class AnimesController extends Controller
     {
         $request->saveCover();
         $anime = Anime::create($request->all());
-        return redirect()->route('backstage.anime.edit', $anime->id)->with('message', 'Create successfully,Affected 1 line');
+        $data = [];
+        foreach ($request->tag_id as $id){
+            $data[] = ['tag_id'=>$id,'anime_id'=>$anime->id];
+        }
+        $row = AnimeTag::insert($data);
+        return redirect()
+            ->route('backstage.anime.edit', $anime->id)
+            ->with('message', 'Create successfully,Affected '.++$row.' line');
     }
 
 
@@ -67,7 +77,8 @@ class AnimesController extends Controller
     public function edit($id)
     {
         $anime = Anime::findOrFail($id);
-        return view('backstage.anime.create_edit',compact('anime'));
+        $tags = Tag::all();
+        return view('backstage.anime.create_edit',compact('anime','tags'));
     }
 
     /**
@@ -80,8 +91,27 @@ class AnimesController extends Controller
      */
     public function update(AnimeRequest $request, $id)
     {
+        $anime_tag = AnimeTag::select('id','tag_id')->where('anime_id',$id)->get()->toArray();
+        // 在数据库中出现却没在表单里出现的，是要删除的关系
+        $delete = array_diff(array_column($anime_tag,'tag_id'),$request->tag_id);
+        // 反之就是要增加的关系
+        $create = array_diff($request->tag_id,array_column($anime_tag,'tag_id'));
+
+        $delete_id = array_filter($anime_tag,function ($value)use($delete){
+            return in_array($value['tag_id'],$delete);
+        });
+        $delete_id = array_column($delete_id,'id');
+
+        $insert = array();
+        foreach ($create as $tag_id){
+            $insert[] = ['anime_id'=>$id,'tag_id'=>$tag_id];
+        }
+        $rest = 0;
+        $rest += AnimeTag::destroy($delete_id);
+        $rest += AnimeTag::insert($insert);
         $request->saveCover();
-        $rest = Anime::where('id',$id)->update_filter($request->all());
+        $rest += Anime::where('id',$id)->update_filter($request->all());
+
         return back()->with('success',"Update successfully, Affected $rest line");
     }
 

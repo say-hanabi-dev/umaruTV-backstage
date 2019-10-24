@@ -32,7 +32,11 @@
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">Type</span>
-                                    <input type="text" class="form-control" required name="type" placeholder="Type">
+                                    <select class="form-control" name="type">
+                                        <option value="area">地区</option>
+                                        <option value="style">风格</option>
+                                        <option value="type">类型</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-xs-5">

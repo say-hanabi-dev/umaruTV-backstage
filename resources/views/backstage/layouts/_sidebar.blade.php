@@ -42,7 +42,18 @@
                     <li><a href="{{ route('backstage.anime.create') }}"><i class="fa fa-circle-o"></i> Create a new</a></li>
                 </ul>
             </li>
-            {{--            Anime end--}}
+        {{--            Anime end--}}
+        <!-- Tag start -->
+            <li>
+                <a href="{{ route('backstage.tag.index') }}">
+                    <i class="fa fa-tag"></i> <span>Animation Tag</span>
+                    <span class="pull-right-container">
+{{--                        <small class="label pull-right bg-green">new</small>--}}
+                        {{--  <i class="fa fa-angle-left pull-right"></i>--}}
+                    </span>
+                </a>
+                <!-- Tag end -->
+            </li>
 
             <!-- Setting start -->
             <li>
@@ -50,11 +61,11 @@
                     <i class="fa fa-gears"></i> <span>Setting</span>
                     <span class="pull-right-container">
 {{--                        <small class="label pull-right bg-green">new</small>--}}
-{{--                        <i class="fa fa-angle-left pull-right"></i>--}}
+                        {{--                        <i class="fa fa-angle-left pull-right"></i>--}}
                     </span>
                 </a>
+                <!-- Setting end -->
             </li>
-            <!-- Setting end -->
 
 
             <li class="treeview">

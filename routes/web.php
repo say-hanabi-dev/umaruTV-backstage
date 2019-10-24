@@ -29,6 +29,8 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
     Route::get('episode/{id}/resource/create','ResourceController@create')->name('resource.create');
     Route::get('episode/resource/player','ResourceController@player')->name('resource.player');
 
+    Route::resource('tag','TagController');
+
     Route::resource('setting','SettingController');
     Route::get('/setting','SettingController@index')->name('setting.index');
     Route::get('/setting/create','SettingController@create')->name('setting.create');

@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Multiple</label>
+                        <label>Tag</label>
                         <select class="form-control select2" name="tag_id[]" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
                             @foreach($tags as $tag)
                                 <option value="{{ $tag->id }}" {{ $anime->tags->find($tag)?'selected':''}} >{{ $tag->name }}</option>

@@ -5,6 +5,16 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Animation view</h3>
+                <div class="box-tools">
+                    <form action="">
+                        <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
+                            <input type="text" name="search" class="form-control pull-right" placeholder="Search" value="{{ request()->get('search') }}">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

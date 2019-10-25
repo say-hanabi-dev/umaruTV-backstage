@@ -247,10 +247,13 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <button href="#" onclick="$('#_user-logout-form').submit()" class="btn btn-default btn-flat">Sign out</button>
+                                <form id="_user-logout-form" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>

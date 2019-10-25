@@ -54,7 +54,7 @@
                 </a>
                 <!-- Tag end -->
             </li>
-            @if(config('app.env')=='local')
+            @can('root')
                 <li class="header">BACKSTAGE MANAGE</li>
 
                 <li class="treeview">
@@ -110,7 +110,7 @@
                 <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-            @endif
+            @endcan
         </ul>
     </section>
     <!-- /.sidebar -->

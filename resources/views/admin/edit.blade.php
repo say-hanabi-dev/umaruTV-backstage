@@ -1,4 +1,4 @@
-`@extends("layouts.app")
+@extends("layouts.app")
 @section('title','Edit profile: '.$user->name)
 @section('content')
     <div class="col-md-12">
@@ -9,7 +9,7 @@
             <!-- /.box-header -->
             <!-- form start -->
 
-            <form role="form" action="{{ route('admin.user.update',$user->id) }}" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{ request()->route()->getActionName() == 'profile'?route('profile.update'):route('admin.user.update',$user->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="box-body">

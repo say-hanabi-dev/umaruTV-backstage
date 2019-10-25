@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -72,7 +73,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [];
+        if ($request->post('password')){
+            $data['password'] = Hash::make($request->post('password'));
+        }
+        $row = User::where('id',$id)->update(array_merge($data,[
+            'name'=>$request->post('name'),
+            'email'=>$request->post('email'),
+        ]));
+        return back()->with('success',"Update successfully, Affected $row line");
     }
 
     /**

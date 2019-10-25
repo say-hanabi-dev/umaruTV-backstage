@@ -28,11 +28,13 @@
                             <td>
                                 <a href="{{ route('backstage.anime.edit',$anime->id) }}" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
                                 <a href="{{ route('backstage.episode.index',$anime->id) }}" class="btn btn-primary">View episode</a>
-                                <button class="btn btn-danger" onclick="$('#delete-{{ $anime->id }}').submit()"><i class="fa fa-trash-o"></i> Delete</button>
-                                <form id="delete-{{ $anime->id }}" method="post" action="{{ route('backstage.anime.destroy',$anime->id) }}" hidden>
-                                    {{ method_field('delete') }}
-                                    {{ csrf_field() }}
-                                </form>
+                                @can('delete-anime')
+                                    <button class="btn btn-danger" onclick="$('#delete-{{ $anime->id }}').submit()"><i class="fa fa-trash-o"></i> Delete</button>
+                                    <form id="delete-{{ $anime->id }}" method="post" action="{{ route('backstage.anime.destroy',$anime->id) }}" hidden>
+                                        {{ method_field('delete') }}
+                                        {{ csrf_field() }}
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

@@ -45,4 +45,6 @@ Route::prefix('administrator/')->namespace('Admin')->middleware('auth')->as('adm
     Route::post('setting/upload','SettingController@upload')->name('upload');
 });
 
+Route::get('/management/profile','IndexController@profile')->name('profile');
+Route::post('/management/profile','IndexController@updateProfile')->name('profile.update');
 Route::get('/home', 'HomeController@index')->name('home');

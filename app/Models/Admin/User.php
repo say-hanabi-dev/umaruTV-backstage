@@ -6,8 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable{
+
     use Notifiable;
 
     /**
@@ -38,4 +38,14 @@ class User extends Authenticatable
     ];
 
     protected $connection = 'sqlite';
+
+    public function root(){
+        return $this->role == 'root';
+    }
+    public function manager(){
+        if ($this->root()){
+            return true;
+        }
+        return $this->role == 'manager';
+    }
 }

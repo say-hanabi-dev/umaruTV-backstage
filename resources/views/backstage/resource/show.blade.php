@@ -1,4 +1,4 @@
-@extends('backstage.layouts.app')
+@extends('layouts.app')
 @section('title',$anime->name.'\'s resource')
 @section('content')
     <div class="col-md-12">

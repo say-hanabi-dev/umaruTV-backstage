@@ -1,4 +1,4 @@
-@extends('backstage.layouts.app')
+@extends('layouts.app')
 @section('title','Tag')
 @section('content')
     <div class="col-md-12">
@@ -33,8 +33,8 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Type</span>
                                     <select class="form-control" name="type">
-                                        <option value="area">地区</option>
                                         <option value="style">风格</option>
+                                        <option value="area">地区</option>
                                         <option value="type">类型</option>
                                     </select>
                                 </div>

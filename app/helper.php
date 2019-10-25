@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Backstage\Setting;
+use App\Models\Admin\Setting;
 
 if (!function_exists('ee')){
     function ee(...$args){

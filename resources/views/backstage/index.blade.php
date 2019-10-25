@@ -1,1 +1,2 @@
-@extends('backstage.layouts.app')
+@extends('layouts.app')
+@section('title','首页')

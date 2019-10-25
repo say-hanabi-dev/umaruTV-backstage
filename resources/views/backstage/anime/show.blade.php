@@ -1,4 +1,4 @@
-@extends("backstage.layouts.app")
+@extends("layouts.app")
 @section('title','Animation view')
 @section('content')
     <div class="col-md-12">

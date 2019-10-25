@@ -15,8 +15,8 @@ class SettingSeeder extends Seeder
     {
 
         DB::connection('sqlite')->table('setting')->insert([
-           ['key'=>'avatar','value'=>'','comment'=>'Default avatar'],
-           ['key'=>'upload_domain','value'=>'','comment'=>'Default upload file domi'],
+            ['key'=>'avatar','value'=>'','comment'=>'Default avatar'],
+            ['key'=>'upload_domain','value'=>'','comment'=>'Default upload file domain'],
         ]);
     }
 }

@@ -1,4 +1,4 @@
-@extends("backstage.layouts.app")
+@extends("layouts.app")
 @section('title','Edit: '.$anime->name)
 @section('content')
     <div class="col-md-7">
@@ -77,9 +77,15 @@
                     <div class="form-group">
                         <label>Tag</label>
                         <select class="form-control select2" name="tag_id[]" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-                            @foreach($tags as $tag)
-                                <option value="{{ $tag->id }}" {{ $anime->tags->find($tag)?'selected':''}} >{{ $tag->name }}</option>
-                            @endforeach
+                            @if($anime->id)
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}" {{ $anime->tags->find($tag)?'selected':''}} >{{ $tag->name }}</option>
+                                @endforeach
+                            @else
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}" >{{ $tag->name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
 

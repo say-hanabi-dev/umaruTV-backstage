@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Backstage;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Backstage\Setting;
+use App\Models\Admin\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -20,7 +20,7 @@ class SettingController extends Controller
 
     public function store(Request $request){
         $anime = Setting::create($request->all());
-        return redirect()->route('backstage.setting.index')->with('message', 'Create successfully,Affected 1 line');
+        return redirect()->route('admin.setting.index')->with('message', 'Create successfully,Affected 1 line');
     }
 
     public function update(Request $request){

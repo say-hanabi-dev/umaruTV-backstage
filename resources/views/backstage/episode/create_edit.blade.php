@@ -1,4 +1,4 @@
-@extends("backstage.layouts.app")
+@extends("layouts.app")
 @if($episode->id)
     @section('title','Edit Episode'.$anime->name)
 @else

@@ -37,6 +37,16 @@
                         <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
+                    @can('root')
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" name="role">
+                                <option value="root">Root</option>
+                                <option value="manager">管理员</option>
+                                <option value="uploader">UP主</option>
+                            </select>
+                        </div>
+                    @endcan
                     <div class="form-group">
                         <label for="InputFile">Upload Avatar</label>
                         <input type="file" name="avatar" id="InputFile">

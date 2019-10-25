@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -73,9 +74,12 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = [];
+        $data = array();
         if ($request->post('password')){
             $data['password'] = Hash::make($request->post('password'));
+        }
+        if (Gate::allows('root')){
+            $data['role'] = $request->role;
         }
         $row = User::where('id',$id)->update(array_merge($data,[
             'name'=>$request->post('name'),

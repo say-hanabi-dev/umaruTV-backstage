@@ -34,7 +34,7 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
 
     Route::resource('tag','TagController');
 });
-Route::prefix('administrator/')->namespace('Admin')->middleware('auth')->as('admin.')->group(function (){
+Route::prefix('administrator/')->namespace('Admin')->middleware('root')->as('admin.')->group(function (){
     Route::resource('user','AdminController');
 
     Route::resource('setting','SettingController');

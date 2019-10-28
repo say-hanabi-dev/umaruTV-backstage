@@ -82,7 +82,7 @@
                                 <td><input class="form-control" type="text" value="{{ $tag->animes->count() }}" disabled></td>
                                 <td>
                                     <button class="btn btn-primary">Save</button>
-                                    <button class="btn btn-defaulte" onclick="$('#edit-{{ $tag->id }}').hide()">Cancel</button>
+                                    <button type="button" class="btn btn-defaulte"  onclick="$('#edit-{{ $tag->id }}').hide()">Cancel</button>
                                 </td>
                             </form>
                         </tr>

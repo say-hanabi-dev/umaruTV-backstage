@@ -46,8 +46,8 @@
                     @select(['name'=>'resolution'])
                     @slot('option')
                         @option(['value'=>1080,'active'=>$resource->resolution]) @slot('show') 1080p @endslot @endoption
-                        @option(['value'=>480,'active'=>$resource->resolution]) @slot('show') 720p @endslot @endoption
-                        @option(['value'=>720,'active'=>$resource->resolution]) @slot('show') 480p @endslot @endoption
+                        @option(['value'=>720,'active'=>$resource->resolution]) @slot('show') 720p @endslot @endoption
+                        @option(['value'=>480,'active'=>$resource->resolution]) @slot('show') 480p @endslot @endoption
                         @option(['value'=>240,'active'=>$resource->resolution]) @slot('show') 240p @endslot @endoption
                     @endslot
                     @endselect

@@ -21,9 +21,9 @@ class AnimesController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')){
-            $animes = Anime::where('name','like','%'.$request->get('search').'%')->orderBy('id','desc')->paginate(20);
+            $animes = Anime::where('name','like','%'.$request->get('search').'%')->orderBy('id','desc')->filter()->paginate(20);
         }else{
-            $animes = Anime::orderBy('id','desc')->paginate(20);
+            $animes = Anime::orderBy('id','desc')->filter()->paginate(20);
         }
         return view('backstage.anime.show',compact('animes'));
     }

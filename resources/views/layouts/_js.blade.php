@@ -14,4 +14,14 @@
 {{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/pages/dashboard2.js"></script>--}}
 {{--<!-- AdminLTE for demo purposes -->--}}
 {{--<script src="https://adminlte.io/themes/AdminLTE/dist/js/demo.js"></script>--}}
-@yield('js')
+<script>
+    function submiteOnHasValue(obj) {
+        var inputs = $(obj).parents('form').find('input');
+        for(var i=0;i<inputs.length;i++){
+            if($(inputs[i]).val()){
+                inputs[i].name = $(inputs[i]).data('name');
+            }
+        }
+    }
+</script>
+@stack('js')

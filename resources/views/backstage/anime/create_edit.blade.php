@@ -113,10 +113,10 @@
         </div>
     </div>
 @endsection
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{ asset('./css/select2.min.css') }}">
-@endsection
-@section('js')
+@endpush
+@push('js')
     <script src="{{ asset('/js/select2.full.min.js') }}"></script>
     <script>
         $('.select2').select2();
@@ -126,4 +126,4 @@
             format:'yyyy-mm-dd',
         })
     </script>
-@endsection
+@endpush

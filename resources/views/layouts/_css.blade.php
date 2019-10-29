@@ -8,4 +8,4 @@
 <script src="{{ asset('/js/app.js') }}"></script>
 <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-@yield('css')
+@stack('css')

@@ -53,7 +53,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-                {{ $animes->appends(["search"=>request()->input('search')])->links() }}
+                {{ $animes->appends(request()->all())->links() }}
                 {{--                <ul class="pagination pagination-sm no-margin pull-right">--}}
                 {{--                    <li><a href="#">«</a></li>--}}
                 {{--                    <li><a href="#">»</a></li>--}}

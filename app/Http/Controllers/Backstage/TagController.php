@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backstage;
 
+use App\Models\Anime;
+use App\Models\AnimeTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -94,7 +96,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $row = Tag::delete($id);
+        $row = Tag::destroy($id);
         return back()->with('message',"Delete successfully, Affected $row line");
     }
 }

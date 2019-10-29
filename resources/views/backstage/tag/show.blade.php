@@ -51,7 +51,7 @@
                         <th style="width: 10px">#</th>
                         <th>Name</th>
                         <th>Type</th>
-                        <th style="width: 40px">Label</th>
+                        <th style="width: 40px">Animation</th>
                         <th>Operating</th>
                     </tr>
                     @foreach($tags as $tag)
@@ -93,17 +93,17 @@
         </div>
     </div>
 @endsection
-@section('css')
+@push('css')
     <style>
         .edit-col{
             display: none;
         }
     </style>
-@endsection
-@section('js')
+@endpush
+@push('js')
     <script>
         function edit(id) {
             $(id).show();
         }
     </script>
-@endsection
+@endpush

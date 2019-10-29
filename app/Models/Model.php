@@ -20,7 +20,9 @@ class Model extends BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->filterHandle();
+        if ($this->filter){
+            $this->filterHandle();
+        }
     }
 
     public function scopeUpdate_filter($q,$date){
@@ -32,18 +34,18 @@ class Model extends BaseModel
 
     public function scopeFilter($q){
         // todo:: 根据 Request 返回 where 条件
-//        $this->buildFilter();
-//        dd(request()->all());
-        foreach (request()->all() as $key => $value){
-            if (empty($value)){continue;}
-            if (str_end_with($key,'_max')){
-                $q = $q->where(str_remove($key,'_max'), '<',$value);
-            }else if (str_end_with($key,'_min')){
-                $q = $q->where(str_remove($key,'_min'), '>',$value);
-            }else{
-                $q = $q->where($key,$value);
+        $request = request();
+        foreach (array_column($this->filter,'field') as $key){
+            if (empty($key)) continue;
+            if ($request->input($key)){
+                $q = $q->where($key,$request->input($key));
             }
-
+            if ($request->input($key.'_max')){
+                $q = $q->where($key,'<',$request->input($key.'_max'));
+            }
+            if ($request->input($key.'_min')){
+                $q = $q->where($key,'>',$request->input($key.'_min'));
+            }
         }
         return $q;
     }

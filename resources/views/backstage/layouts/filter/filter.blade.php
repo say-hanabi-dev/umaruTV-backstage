@@ -4,10 +4,15 @@
 @push('js')
     <script src="{{ asset('/js/moment.min.js') }}"></script>
     <script src="{{ asset('/js/daterangepicker.js') }}"></script>
+    <script>
+        $('#clear-filter').click(function () {
+            $(this).find('input').val("")
+        })
+    </script>
 @endpush
 
-<div class="box">
-    <form action="{{ route('backstage.anime.index') }}">
+<div class="box" id="filter">
+    <form action="{{ route('backstage.anime.index') }}" class="asdkasd">
         <div class="box-header with-border">
             <h3 class="box-title">{{ ucfirst($table) }} filter</h3>
         </div>
@@ -27,7 +32,8 @@
         </div>
     <!-- /.box-body -->
         <div class="box-footer clearfix">
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" id="clear-filter">Clear</button>
+            <button class="btn btn-primary pull-right" id="submit-form" onclick="submiteOnHasValue(this)">Submit</button>
         </div>
     </form>
 </div>

@@ -22,7 +22,7 @@ class AnimesController extends Controller
 //        $animes->buildFilter();
 
         $animes = Anime::filter()->paginate(20);
-        dd($animes);
+//        dd($animes);
         return view('backstage.anime.show',compact('animes'));
     }
 

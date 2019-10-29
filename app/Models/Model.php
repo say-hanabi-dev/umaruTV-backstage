@@ -37,25 +37,24 @@ class Model extends BaseModel
         foreach (request()->all() as $key => $value){
             if (empty($value)){continue;}
             if (str_end_with($key,'_max')){
-//                dump($key);
-//                dd($value);
                 $q = $q->where(str_remove($key,'_max'), '<',$value);
-            }
-            if (str_end_with($key,'_min')){
-//                dump($key);
-//                dd($value);
+            }else if (str_end_with($key,'_min')){
                 $q = $q->where(str_remove($key,'_min'), '>',$value);
+            }else{
+                $q = $q->where($key,$value);
             }
+
         }
         return $q;
     }
 
-    public function filterView(){
-        $table = $this->getTable();
-        $this->buildFilter();
+    static public function filterView(){
+        $self = new static ;
+        $table = $self->getTable();
+        $self->buildFilter();
         return view('backstage.layouts.filter.filter',[
             'table'=>$table,
-            'role'=>$this->filter,
+            'role'=>$self->filter,
             'filter'
         ]);
     }

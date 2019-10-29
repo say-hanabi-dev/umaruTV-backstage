@@ -10,9 +10,9 @@ class Anime extends Model
     ];
 
     protected $filter = [
-        ['name'=>'Name','field'=>'name'],
         ['name'=>'Watch','field'=>'watch','type'=>'int'],
         ['name'=>'Collection','field'=>'collection','type'=>'int'],
+        ['field'=>'episodes','type'=>'int'],
         ['field'=>'status'],
         ['field'=>'release_time','type'=>'time'],
         ['field'=>'created_at','type'=>'time'],

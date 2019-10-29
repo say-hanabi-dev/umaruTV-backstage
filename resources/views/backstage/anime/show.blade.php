@@ -53,6 +53,6 @@
         </div>
     </div>
     <div class="col-md-3">
-        {!! $animes->filterView() !!}
+        {!! \App\Models\Anime::filterView() !!}
     </div>
 @endsection

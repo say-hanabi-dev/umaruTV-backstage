@@ -5,8 +5,8 @@
             <span>Choose a time period</span>
             <i class="fa fa-caret-down"></i>
         </button>
-        <input type="hidden" class="time_form" name="{{ $column['field'] }}_form">
-        <input type="hidden" name="{{ $column['field'] }}_to">
+        <input type="hidden" id="{{ $column['field'] }}_min" data-name="{{ $column['field'] }}_min" value="{{ request()->input($column['field'].'_min') }}">
+        <input type="hidden" id="{{ $column['field'] }}_max" data-name="{{ $column['field'] }}_max" value="{{ request()->input($column['field'].'_min') }}">
     </div>
 </div>
 @push('js')
@@ -21,14 +21,14 @@
                     'This Month'  : [moment().startOf('month'), moment().endOf('month')],
                     'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
-                startDate: moment().subtract(29, 'days'),
-                endDate  : moment()
+                // startDate: moment().subtract(29, 'days'),
+                // endDate  : moment()
             },
             function (start, end) {
                 {{--$('#{{ $column[\'field'] }} span').html(start.format('YYYY-M-D') + ' - ' + end.format('YYYY-M-D'))--}}
-                $('#{{ $column['field'] }}-daterange-btn span').html(start.format('YYYY-M-D') + ' - ' + end.format('YYYY-M-D'))
-                $('input[name="{{ $column['field'] }}_min"]').val(start.format('YYYY-M-D'))
-                $('input[name="{{ $column['field'] }}_max"]').val(end.format('YYYY-M-D'))
+                $('#{{ $column['field'] }}-daterange-btn span').html(start.format('YYYY-M-D') + ' - ' + end.format('YYYY-M-D'));
+                $('#{{ $column['field'] }}_min').val(start.format('YYYY-M-D'));
+                $('#{{ $column['field'] }}_max').val(end.format('YYYY-M-D'));
                 $().html(start.format('YYYY-M-D') + ' - ' + end.format('YYYY-M-D'))
             }
         )

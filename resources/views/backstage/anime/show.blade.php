@@ -35,7 +35,7 @@
                             <td>
                                 <span class="badge bg-blue">{{ $anime->episodes }}</span>
                             </td>
-                            <td><span class="badge bg-red">{{ $anime->status }}</span></td>
+                            <td><span class="badge bg-navy">{{ $anime->status() }}</span></td>
                             <td>
                                 <a href="{{ route('backstage.anime.edit',$anime->id) }}" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
                                 <a href="{{ route('backstage.episode.index',$anime->id) }}" class="btn btn-primary">View episode</a>

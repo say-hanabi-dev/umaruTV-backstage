@@ -2,11 +2,12 @@
     <label>{{$column['name']}}:</label>
     <div class="input-group">
         <button type="button" class="btn btn-default pull-right" id="{{ $column['field'] }}-daterange-btn">
-            <span>Choose a time period</span>
+            <span>{{ request()->input($column['field'].'_min')?request()->input($column['field'].'_min').' - '.request()->input($column['field'].'_max'):'Choose a time period' }}
+            </span>
             <i class="fa fa-caret-down"></i>
         </button>
         <input type="hidden" id="{{ $column['field'] }}_min" data-name="{{ $column['field'] }}_min" value="{{ request()->input($column['field'].'_min') }}">
-        <input type="hidden" id="{{ $column['field'] }}_max" data-name="{{ $column['field'] }}_max" value="{{ request()->input($column['field'].'_min') }}">
+        <input type="hidden" id="{{ $column['field'] }}_max" data-name="{{ $column['field'] }}_max" value="{{ request()->input($column['field'].'_max') }}">
     </div>
 </div>
 @push('js')

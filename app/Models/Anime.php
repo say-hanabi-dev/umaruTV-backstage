@@ -28,12 +28,12 @@ class Anime extends Model
         return $this->belongsToMany(Tag::class,'anime_tags');
     }
 
-    public function scopeWithVideo($query, bool $with)
-    {
-    	if ($with) {
-    		return $query->with('video');
-    	}else{
-    		return $query;
-    	}
+    public function status(){
+        $data = [
+            'end'=>'完结',
+            'stop'=>'暂停更新',
+            'updating'=>'更新中'
+        ];
+        return $data[$this->status];
     }
 }

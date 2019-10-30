@@ -1,3 +1,4 @@
+@stack('css_header')
 <!-- Bootstrap 3.3.7 -->
 {{--    TODO:: app.less use bootstrap--}}
 <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">

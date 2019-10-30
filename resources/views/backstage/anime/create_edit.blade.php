@@ -113,7 +113,7 @@
         </div>
     </div>
 @endsection
-@push('css')
+@push('css_header')
     <link rel="stylesheet" href="{{ asset('./css/select2.min.css') }}">
 @endpush
 @push('js')

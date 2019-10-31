@@ -62,17 +62,6 @@ class AnimesController extends Controller
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -95,24 +84,26 @@ class AnimesController extends Controller
      */
     public function update(AnimeRequest $request, $id)
     {
-        $anime_tag = AnimeTag::select('id','tag_id')->where('anime_id',$id)->get()->toArray();
-        // 在数据库中出现却没在表单里出现的，是要删除的关系
-        $delete = array_diff(array_column($anime_tag,'tag_id'),$request->tag_id);
-        // 反之就是要增加的关系
-        $create = array_diff($request->tag_id,array_column($anime_tag,'tag_id'));
-
-        $delete_id = array_filter($anime_tag,function ($value)use($delete){
-            return in_array($value['tag_id'],$delete);
-        });
-        $delete_id = array_column($delete_id,'id');
-
-        $insert = array();
-        foreach ($create as $tag_id){
-            $insert[] = ['anime_id'=>$id,'tag_id'=>$tag_id];
-        }
         $rest = 0;
-        $rest += AnimeTag::destroy($delete_id);
-        $rest += AnimeTag::insert($insert);
+        if ($request->tag_id){
+            $anime_tag = AnimeTag::select('id','tag_id')->where('anime_id',$id)->get()->toArray();
+            // 在数据库中出现却没在表单里出现的，是要删除的关系
+            $delete = array_diff(array_column($anime_tag,'tag_id'),$request->tag_id);
+            // 反之就是要增加的关系
+            $create = array_diff($request->tag_id,array_column($anime_tag,'tag_id'));
+
+            $delete_id = array_filter($anime_tag,function ($value)use($delete){
+                return in_array($value['tag_id'],$delete);
+            });
+            $delete_id = array_column($delete_id,'id');
+
+            $insert = array();
+            foreach ($create as $tag_id){
+                $insert[] = ['anime_id'=>$id,'tag_id'=>$tag_id];
+            }
+            $rest += AnimeTag::destroy($delete_id);
+            $rest += AnimeTag::insert($insert);
+        }
         $request->saveCover();
         $rest += Anime::where('id',$id)->update_filter($request->all());
 
@@ -128,5 +119,25 @@ class AnimesController extends Controller
     public function destroy($id){
         $rest = Anime::destroy($id);
         return back()->with('success',"Delete successfully, Affected $rest line");
+    }
+
+    public function timeline(Request $request){
+        $active = $request->input('active')?:1;
+
+        $animes = Anime::whereIn('status',['stop','updating'])->get();
+        return view('backstage.anime.timeline',compact('animes','active'));
+    }
+
+    public function search(Request $request){
+        if (!$request->input('q')){
+            return Anime::select('id','name')->limit(10)->get();
+        }
+        return Anime::select('id','name')->where('name','like','%'.$request->input('q').'%')->limit(10)->get();
+    }
+
+    public function add(Request $request){
+//        dd($request->all());
+        $row = Anime::where('id',$request->input('id'))->update(['update_time'=>$request->input('update_time')]);
+        return back()->with('success','Update successfully, Affected '.$row.' line');
     }
 }

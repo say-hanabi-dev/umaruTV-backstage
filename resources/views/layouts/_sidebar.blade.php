@@ -40,6 +40,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ route('backstage.anime.index') }}"><i class="fa fa-circle-o"></i> Show all</a></li>
                     <li><a href="{{ route('backstage.anime.create') }}"><i class="fa fa-circle-o"></i> Create a new</a></li>
+                    <li><a href="{{ route('backstage.anime.timeline') }}"><i class="fa fa-calendar"></i> Timeline</a></li>
                 </ul>
             </li>
             {{--            Anime end--}}

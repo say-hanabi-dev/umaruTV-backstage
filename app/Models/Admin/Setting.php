@@ -23,13 +23,24 @@ class Setting extends Model
     }
 
     private static function getSetting($key){
-        try{
-            return self::where('key',$key)->first()->value;
-        }catch (\ErrorException $errorException){
-            return '';
+        if (empty($GLOBALS['setting'])){
+            $GLOBALS['setting'] = array();
         }
+        if (isset($GLOBALS['setting'][$key])){
+            return $GLOBALS['setting'][$key];
+        }
+        try{
+            $GLOBALS['setting'][$key] = self::where('key',$key)->first()->value;
+        }catch (\ErrorException $errorException){
+            $GLOBALS['setting'][$key] = '';
+        }
+        return $GLOBALS['setting'][$key];
     }
     private static function saveSetting($key,$value){
+        if (!isset($_SETTING)){
+            define('_SETTING',array());
+        }
+        $_SETTING[$key] = $value;
         return self::where('key',$key)->update([$key=>$value]);
     }
 }

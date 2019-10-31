@@ -23,8 +23,11 @@ Auth::routes();
 Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')->group(function (){
     Route::view('/','backstage.index');
 
-    Route::resource('anime','AnimesController');
+    Route::resource('anime','AnimesController')->except('show');
     Route::resource('episode','EpisodeController');
+    Route::get('anime/timeline/','AnimesController@timeline')->name('anime.timeline');
+    Route::post('anime/timeline/add','AnimesController@add')->name('anime.add');
+    Route::get('anime/search','AnimesController@search')->name('anime.search');
     Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
     Route::get('anime/{id}/episode/create','EpisodeController@create')->name('episode.create');
     Route::resource('resource','ResourceController');

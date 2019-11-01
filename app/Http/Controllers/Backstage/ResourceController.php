@@ -50,16 +50,6 @@ class ResourceController extends Controller
         return redirect()->route('backstage.resource.index',$request->video_id)->with('success','Create successfully, Affected 1 line');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

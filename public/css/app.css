@@ -3099,6 +3099,12 @@
   margin: 10px 0;
 }
 
+.anime-timeline-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .anime-timeline-item img {
   width: 90px;
   height: 90px;
@@ -3106,7 +3112,12 @@
 }
 
 .anime-timeline-item a {
-  padding-left: 10px;
   font-size: 15px;
+  display: inherit;
+  padding: 10px 0;
+}
+
+.anime-timeline-item div {
+  padding: 0;
 }
 

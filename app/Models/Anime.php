@@ -36,4 +36,10 @@ class Anime extends Model
         ];
         return $data[$this->status];
     }
+
+    public function scopeSearch($q,$search){
+        if (empty($search)) return $q;
+
+        return $q->where('name','like','%'.$search.'%');
+    }
 }

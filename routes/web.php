@@ -24,18 +24,19 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
     Route::view('/','backstage.index');
 
     Route::resource('anime','AnimesController')->except('show');
-    Route::resource('episode','EpisodeController');
+    Route::resource('episode','EpisodeController')->except('show');
     Route::get('anime/timeline/','AnimesController@timeline')->name('anime.timeline');
     Route::post('anime/timeline/add','AnimesController@add')->name('anime.add');
+    Route::post('anime/timeline/end/{id}','AnimesController@end')->name('anime.end');
     Route::get('anime/search','AnimesController@search')->name('anime.search');
     Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
     Route::get('anime/{id}/episode/create','EpisodeController@create')->name('episode.create');
-    Route::resource('resource','ResourceController');
+    Route::resource('resource','ResourceController')->except('show');
     Route::get('episode/{id}/resource','ResourceController@index')->name('resource.index');
     Route::get('episode/{id}/resource/create','ResourceController@create')->name('resource.create');
     Route::get('episode/resource/player','ResourceController@player')->name('resource.player');
 
-    Route::resource('tag','TagController');
+    Route::resource('tag','TagController')->except('create','edit');
 });
 Route::prefix('administrator/')->namespace('Admin')->middleware('root')->as('admin.')->group(function (){
     Route::resource('user','AdminController');

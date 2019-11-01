@@ -32,9 +32,18 @@
                         @for($i = 1;$i<8;$i++)
                             <div class="tab-pane row {{ $active==$i?'active':'' }}" id="tab_{{ $i }}">
                                 @foreach($animes->filter(function ($value)use($i){return $value->update_time == $i;}) as $anime)
-                                    <div class="col-md-6 anime-timeline-item">
-                                        <img src="{{ $anime->cover }}" class="img-thumbnail">
-                                        <a href="{{ route('backstage.anime.edit',$anime->id) }}">{{ mb_substr($anime->name,0,20) }}</a>
+                                    <div class="col-md-6 col-sm-6 anime-timeline-item">
+                                        <div class="col-md-3" style="padding: 0">
+                                            <img src="{{ $anime->cover }}" class="img-thumbnail">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <a href="{{ route('backstage.anime.edit',$anime->id) }}" title="{{ $anime->name}}">{{ $anime->name }}</a>
+                                            <button class="btn btn-primary btn-xs" onclick="$('#update-completed-{{$anime->id}}').submit()">更新完毕</button>
+                                            <form action="{{ route('backstage.anime.end', $anime->id) }}" id="update-completed-{{$anime->id}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="tab" value="{{ $i }}">
+                                            </form>
+                                        </div>
                                     </div>
                                 @endforeach
                                 <div class="col-md-12" style="margin-top: 30px">

@@ -10,8 +10,9 @@ class SettingController extends Controller
 {
 
     public function index(){
-        $setting = Setting::all();
-        return view('backstage.setting.show',compact('setting'));
+        return view('backstage.setting.show',[
+            'setting'=>Setting::all()
+        ]);
     }
 
     public function create(){
@@ -19,8 +20,10 @@ class SettingController extends Controller
     }
 
     public function store(Request $request){
-        $anime = Setting::create($request->all());
-        return redirect()->route('admin.setting.index')->with('message', 'Create successfully,Affected 1 line');
+        Setting::create($request->all());
+        return redirect()
+            ->route('admin.setting.index')
+            ->with('message', 'Create successfully,Affected 1 line');
     }
 
     public function update(Request $request){

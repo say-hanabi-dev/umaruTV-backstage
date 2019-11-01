@@ -51,18 +51,7 @@ class EpisodeController extends Controller
         $row = Anime::where('id',$request->anime_id)->increment('episodes');
         return redirect()
             ->route('backstage.episode.index',$request->anime_id)
-            ->with('success','Create successfully, Affected '.($row+1).' line');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            ->with('success','Create successfully, Affected '.++$row.' line');
     }
 
     /**

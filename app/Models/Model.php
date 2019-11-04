@@ -33,6 +33,8 @@ class Model extends BaseModel
     }
 
     public function scopeFilter($q){
+        if (empty($this->filter)) return $q;
+
         // todo:: 根据 Request 返回 where 条件
         $request = request();
         foreach (array_column($this->filter,'field') as $key){

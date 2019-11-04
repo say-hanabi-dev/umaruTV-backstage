@@ -19,9 +19,20 @@
         var inputs = $(obj).parents('form').find('input');
         for(var i=0;i<inputs.length;i++){
             if($(inputs[i]).val()){
+                if(!$(inputs[i]).data('name')){
+                    continue;
+                }
                 inputs[i].name = $(inputs[i]).data('name');
             }
         }
     }
+    // $('input').change(function (obj) {
+    //     if(!$(this).data('name')){
+    //         return;
+    //     }
+    //     if ($(this).val()){
+    //         $(this).attr('name',$(this).data('name'));
+    //     }
+    // })
 </script>
 @stack('js')

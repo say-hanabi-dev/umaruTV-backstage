@@ -98,6 +98,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return back()->with('success','Delete successfully, Affected 1 line');
     }
 }

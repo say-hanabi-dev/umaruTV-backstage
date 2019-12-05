@@ -55,6 +55,14 @@
                 </a>
                 <!-- Tag end -->
             </li>
+            <!-- Ad start -->
+            <li>
+                <a href="{{ route('backstage.ad.index') }}">
+                    <i class="fa fa-bullhorn"></i> <span>Advertising</span>
+                    <span class="pull-right-container"></span>
+                </a>
+                <!-- Ad end -->
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>User</span>

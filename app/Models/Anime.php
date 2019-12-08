@@ -17,8 +17,8 @@ class Anime extends Model
         ['field'=>'release_time','type'=>'time'],
         ['field'=>'created_at','type'=>'time'],
     ];
-    
-    public function video()
+
+    public function episode()
     {
     	return $this->hasMany(Episode::class,'anime_id');
     }

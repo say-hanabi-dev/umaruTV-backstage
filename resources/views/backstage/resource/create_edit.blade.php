@@ -27,7 +27,7 @@
                 @endif
                 {{ csrf_field() }}
                 @if(empty($resource->id))
-                    <input type="hidden" name="video_id" value="{{ $episode->id }}">
+                    <input type="hidden" name="episode_id" value="{{ $episode->id }}">
                 @endif
                 <div class="box-body">
                     @showError @endshowError

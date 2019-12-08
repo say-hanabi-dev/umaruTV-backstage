@@ -20,7 +20,7 @@ class ResourceController extends Controller
     {
         $episode = Episode::findOrFail($id);
         $anime = $episode->anime;
-        $resources = Resource::where('video_id',$id)->get();
+        $resources = Resource::where('episode_id',$id)->get();
         return view('backstage.resource.show',compact('resources','anime','episode'));
     }
 
@@ -47,7 +47,7 @@ class ResourceController extends Controller
     {
 //        dd($request->all());
         Resource::create($request->all());
-        return redirect()->route('backstage.resource.index',$request->video_id)->with('success','Create successfully, Affected 1 line');
+        return redirect()->route('backstage.resource.index',$request->episode_id)->with('success','Create successfully, Affected 1 line');
     }
 
 

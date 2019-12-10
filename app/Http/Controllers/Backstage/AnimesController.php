@@ -50,7 +50,9 @@ class AnimesController extends Controller
     {
         $request->saveCover();
         $anime = Anime::create($request->all());
-        $row = AnimeTag::association($anime->id,$request->tag_id);
+        $row = 0;
+        if ($request->input('tag_id'))
+            $row = AnimeTag::association($anime->id,$request->input('tag_id'));
         return redirect()
             ->route('backstage.anime.edit', $anime->id)
             ->with('message', 'Create successfully,Affected '.++$row.' line');

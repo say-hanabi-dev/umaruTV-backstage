@@ -13,7 +13,7 @@ class CreateSettingTable extends Migration
      */
     public function up()
     {
-        Schema::create('setting', function (Blueprint $table) {
+        Schema::connection('sqlite')->create('setting', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key')->unique();
             $table->string('value')->nullable();

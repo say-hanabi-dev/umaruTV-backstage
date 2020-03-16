@@ -63,6 +63,13 @@
                 </a>
                 <!-- Ad end -->
             </li>
+            <li>
+                <a href="{{ route('backstage.websetting.index') }}">
+                    <i class="fa fa-gears"></i> <span>Web Setting</span>
+                    <span class="pull-right-container"></span>
+                </a>
+                <!-- Ad end -->
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>User</span>

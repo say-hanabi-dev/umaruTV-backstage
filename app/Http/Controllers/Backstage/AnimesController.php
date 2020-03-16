@@ -7,6 +7,8 @@ use App\Http\Type\EmptyType;
 use App\Models\Anime;
 use App\Http\Controllers\Controller;
 use App\Models\AnimeTag;
+use App\Models\Danmaku;
+use App\Models\Episode;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -134,5 +136,106 @@ class AnimesController extends Controller
 
         return back()
             ->with('success','Update successfully, Affected 1 line');
+    }
+
+    public function batch(Request $request){
+//        dd($request->toArray());
+        $row = 0;
+        switch ($request->input('operating')){
+            case 'delete':
+                $row = Anime::destroy($request->input('ids')); break;
+            case 'merge':
+                $row = $this->mergeAnimeResource($request->input('ids'));break;
+            case "setEnd":
+                $row = Anime::whereIn('id',$request->input('ids'))->update(['end']); break;
+        }
+        return back()
+            ->with('success',"Update successfully, Affected $row line");
+
+    }
+
+    public function mergeAnimeResource($ids){
+        $animes = Anime::whereIn('id',$ids)->get();
+        $max_episode_count = $animes[0]->episode()->count();
+        $max_episodes = $animes[0]->episode;
+        foreach ($animes as $anime){
+            $count = $anime->episode()->count();
+            if ($count > $max_episode_count){
+                $max_episodes = $anime->episode;
+                $max_episode_count = $count;
+            }
+        }
+        $count = 0;
+        foreach ($animes as $anime){
+            $episodes = $anime->episode;
+            foreach ($episodes as $episode){
+                $episode->resource()->update(['episode_id'=>$max_episodes[$count]->id]);
+            }
+            $count ++;
+        }
+        $master = $animes->pop();
+        $master->episode()->delete();
+        foreach ($max_episodes as $episode){
+            $episode->update(['anime_id'=>$master->id]);
+        }
+
+        foreach ($animes as $anime){
+            $anime->delete();
+        }
+    }
+
+    public function mergeAnime($ids){
+        $row = 0;
+        $animes = Anime::whereIn('id',$ids)->orderBy('id','desc')->get();
+        $merge_data = [
+            'watch'=>0,
+            'collection'=>0,
+            'danmaku'=>0,
+        ];
+        $max_episodes = 0;
+        $max_episodes_anime = $animes[0];
+
+        foreach ($animes as $anime){
+            $merge_data['watch'] += $anime->watch;
+            $merge_data['collection'] += $anime->collection;
+            $merge_data['danmaku'] += $anime->danmaku;
+
+            if ($anime->episode()->count() > $max_episodes){
+                $max_episodes = $anime->episode()->count();
+                $max_episodes_anime = $anime;
+            }
+        }
+        dump($max_episodes_anime);
+
+        $max_episodes = $max_episodes_anime->episode()->orderBy('id','asc')->orderBy('ranking','asc')->get();
+        foreach ($animes as $anime){
+            if ($anime->id == $max_episodes_anime->id)
+                continue;
+            $num = 0;
+            foreach ($anime->episode()->orderBy('id','asc')->orderBy('ranking','asc')->get() as $episode){
+                $row += $episode->resource()->update(['episode_id'=>$max_episodes[$num]->id]);
+                $num++;
+            }
+        }
+        dump($max_episodes_anime->episode()->with('resource')->get());
+
+        $master = $animes->pop();
+        $row += $master->update($merge_data);
+        $row += $master->episode()->delete();
+        $row += $max_episodes_anime->episode()->update(['anime_id'=>$master->id]);
+        dump($master->episode()->with('resource')->get());
+        dump($ids);
+        dump(array_filter($ids,function ($v)use($master){
+            return ! ($v == $master->id);
+        }));
+
+//        dd($master);
+
+        $row += Anime::destroy(array_filter($ids,function ($v)use($master){
+            return ! ($v == $master->id);
+        }));
+
+
+        return $row;
     }
 }

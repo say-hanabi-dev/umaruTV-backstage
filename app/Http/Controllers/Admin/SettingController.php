@@ -35,13 +35,4 @@ class SettingController extends Controller
         }
         return back()->with('success',"Update success, Affected $row line");
     }
-
-    public function upload(Request $request){
-        $time = date('Y/m');
-        $rst = $request->file('upload_file')->store('/upload/'.$time, 'public');
-        return [
-            'code'=>200,
-            'path'=>'/storage/'.$rst
-        ];
-    }
 }

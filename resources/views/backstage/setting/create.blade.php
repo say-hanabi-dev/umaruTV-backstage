@@ -8,7 +8,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" action="{{ route('backstage.setting.store') }}" enctype="multipart/form-data">
+            <form role="form" method="post" action="{{ route('admin.setting.store') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="form-group">

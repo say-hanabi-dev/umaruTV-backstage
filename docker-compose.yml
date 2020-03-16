@@ -1,0 +1,33 @@
+version: "3.1"
+
+services:
+  web:
+    image: nginx
+    restart: always
+    volumes:
+      - ./container/nginx:/etc/nginx/conf.d/
+      - ./:/app
+    ports:
+      - 80:80
+
+
+  php:
+    image: ricardo/php-fpm
+    restart: always
+    volumes:
+    - ./:/app
+
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example
+    ports:
+    - 33060:3306
+    volumes:
+      - ./container/mysql:/var/lib/mysql

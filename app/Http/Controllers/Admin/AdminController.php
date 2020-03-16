@@ -85,6 +85,7 @@ class AdminController extends Controller
             'name'=>$request->post('name'),
             'email'=>$request->post('email'),
         ]));
+
         return back()->with('success',"Update successfully, Affected $row line");
     }
 

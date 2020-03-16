@@ -20,6 +20,9 @@ Auth::routes();
 //    return view('welcome');
 //});
 
+Route::post('/annex','ToolController@annex')->name('annex.upload');
+
+
 Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')->group(function (){
     Route::view('/','backstage.index');
 
@@ -31,6 +34,9 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
     Route::get('anime/search','AnimesController@search')->name('anime.search');
     Route::get('anime/{id}/episode/','EpisodeController@index')->name('episode.index');
     Route::get('anime/{id}/episode/create','EpisodeController@create')->name('episode.create');
+
+    Route::post('anime/batch/','AnimesController@batch')->name('anime.batch');
+
     Route::resource('resource','ResourceController')->except('show');
     Route::get('episode/{id}/resource','ResourceController@index')->name('resource.index');
     Route::get('episode/{id}/resource/create','ResourceController@create')->name('resource.create');
@@ -39,16 +45,15 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
     Route::resource('tag','TagController')->except('create','edit');
     Route::resource('ad','AdvertisingController')->except('show','create','edit');
     Route::resource('user','UserController');
+    Route::get('/websetting', 'WebSettingController@index')->name('websetting.index');
+    Route::post('/websetting/update', 'WebSettingController@update')->name('websetting.update');
 });
+
 Route::prefix('administrator/')->namespace('Admin')->middleware('root')->as('admin.')->group(function (){
     Route::resource('user','AdminController');
 
-    Route::resource('setting','SettingController');
-    Route::get('/setting','SettingController@index')->name('setting.index');
-    Route::get('/setting/create','SettingController@create')->name('setting.create');
-    Route::post('/setting','SettingController@store')->name('setting.store');
+    Route::resource('setting','SettingController')->only('index', 'create', 'store');
     Route::post('/setting/update','SettingController@update')->name('setting.update');
-    Route::post('setting/upload','SettingController@upload')->name('upload');
 });
 
 Route::get('/management/profile','IndexController@profile')->name('profile');

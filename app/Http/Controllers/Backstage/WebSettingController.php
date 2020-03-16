@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\Backstage;
 
-use App\Http\Requests\UserRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+use \App\Models\Setting;
 
-class UserController extends Controller
+class WebSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $users = User::filter()->paginate();
-        return view('backstage.user.show',compact('users'));
+        return view('backstage.websetting.show',[
+            'setting' => Setting::all()
+        ]);
     }
 
     /**
@@ -58,12 +56,11 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('backstage.user.create_edit',compact('user'));
+        //
     }
 
     /**
@@ -71,34 +68,21 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'password' => ['string', 'min:8', 'confirmed'],
-        ]);
-
-        $data = $request->toArray();
-        if ($request->input('password'))
-            $data['password'] = Hash::make($request->input('password'));
-
-        User::where('id',$id)->update_filter($data);
-
-        return back()->with('success','Update successfully, Affected 1 line');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return back()->with('success','Delete successfully, Affected 1 line');
+        //
     }
 }

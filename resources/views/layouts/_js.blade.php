@@ -34,5 +34,9 @@
     //         $(this).attr('name',$(this).data('name'));
     //     }
     // })
+
+    $('.on-click-push').change(function (obj) {
+        $(this).attr('name',$(this).data('name'))
+    });
 </script>
 @stack('js')

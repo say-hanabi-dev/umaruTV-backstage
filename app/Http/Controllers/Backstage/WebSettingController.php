@@ -68,11 +68,16 @@ class WebSettingController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        foreach ($request->except('_token') as $key => $value){
+            Setting::where('id', $key)->update([
+                'value' => $value
+            ]);
+        }
+        return back();
     }
 
     /**

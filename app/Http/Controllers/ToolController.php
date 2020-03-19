@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Storage;
 class ToolController extends Controller
 {
     public function annex(Request $request){
-        $path = $request->file('annex')->store('annex/'. date('Y/m'), 'public');
+        $path = $request->file('annex')->store('annex/'. date('Y/m'));
         return [
             'status' => 'success',
-            'path' => Storage::url($path)
+            'path' => $path
         ];
     }
 }

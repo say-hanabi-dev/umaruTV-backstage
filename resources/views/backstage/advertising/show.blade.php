@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Tag')
+@section('title','Advertising')
 @section('content')
     <div class="col-md-12">
         <div class="box box-primary">
@@ -23,10 +23,16 @@
                 <form action="{{ route('backstage.ad.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             <div class="input-group">
                                 <span class="input-group-addon">Name:</span>
-                                <input type="text" class="form-control" required name="name" placeholder="Nmae">
+                                <select class="form-control" required name="name">
+                                    <option selected value="carousel">Home page carousel</option>
+{{--                                    <option>option 2</option>--}}
+{{--                                    <option>option 3</option>--}}
+{{--                                    <option>option 4</option>--}}
+{{--                                    <option>option 5</option>--}}
+                                </select>
                             </div>
                         </div>
                         <div class="col-xs-2">

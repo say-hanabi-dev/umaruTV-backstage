@@ -78,7 +78,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('backstage.user.index') }}"><i class="fa fa-circle-o"></i> All User</a></li>
+                    <li><a href="{{ route('backstage.user.index') }}"><i class="fa fa-circle-o"></i> All Users</a></li>
+                    <li><a href="{{ route('backstage.user.banned') }}"><i class="fa fa-circle-o"></i> Banned Users</a></li>
                 </ul>
             </li>
             @can('root')

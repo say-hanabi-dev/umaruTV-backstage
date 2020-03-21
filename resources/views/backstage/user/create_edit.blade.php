@@ -37,6 +37,31 @@
                         @enderror
                     </div>
 
+                    <div class="form-group @error('sign') has-error @enderror">
+                        <label for="InputSign">Sign</label>
+                        <input type="text" class="form-control" id="InputSign" name="sign" placeholder="Enter sign" value="{{ $user->sign }}">
+                        @error('sign')
+                        <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group @error('avatar') has-error @enderror">
+                        <label for="InputAvatar">Avatar</label>
+                        <input type="file" id="InputAvatar" name="avatar">
+                        @error('avatar')
+                        <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group @error('cover') has-error @enderror">
+                        <label for="InputCover">Cover</label>
+                        <input type="file" id="InputCover" name="cover">
+                        @error('cover')
+                        <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <hr>
+
                     <div class="form-group @error('password') has-error @enderror">
                         <label for="InputPassword">Password</label>
                         <input type="password" class="form-control" id="InputPassword" data-name="password" placeholder="Enter password">

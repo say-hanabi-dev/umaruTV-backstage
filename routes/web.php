@@ -44,9 +44,12 @@ Route::prefix('')->namespace('Backstage')->middleware('auth')->as('backstage.')-
 
     Route::resource('tag','TagController')->except('create','edit');
     Route::resource('ad','AdvertisingController')->except('show','create','edit');
-    Route::resource('user','UserController');
-    Route::get('/websetting', 'WebSettingController@index')->name('websetting.index');
-    Route::post('/websetting/update', 'WebSettingController@update')->name('websetting.update');
+    Route::resource('user','UserController')->except('show');
+    Route::get('user/banned','UserController@banned')->name('user.banned');
+    Route::post('user/block','UserController@block')->name('user.block');
+    Route::post('user/unblock/{id}','UserController@unblock')->name('user.unblock');
+    Route::get('websetting', 'WebSettingController@index')->name('websetting.index');
+    Route::post('websetting/update', 'WebSettingController@update')->name('websetting.update');
 });
 
 Route::prefix('administrator/')->namespace('Admin')->middleware('root')->as('admin.')->group(function (){

@@ -11,11 +11,24 @@ if (!function_exists('ee')){
         }
     }
 }
-if (!function_exists('route_class')){
-    function route_class(){
-        return str_replace('.','-',Route::currentRouteName());
+if (! function_exists('current_route_name')){
+    function current_route_name(){
+        return \Illuminate\Support\Facades\Route::currentRouteName();
     }
 }
+
+if (! function_exists('current_route_name_is')){
+    function current_route_name_is(string $name): bool {
+        return current_route_name() === $name;
+    }
+}
+
+if (!function_exists('route_class')){
+    function route_class(){
+        return str_replace('.','-',current_route_name());
+    }
+}
+
 function array_filter_key(array $input, array $key){
     return array_filter($input,function ($i)use($key){
         return in_array($i,$key);

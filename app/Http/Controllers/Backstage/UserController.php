@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backstage;
 
 use App\Http\Requests\Backstage\UserRequest;
-use App\Models\User;
+use App\Models\Website\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Website;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model;
 
 class Advertising extends Model
 {

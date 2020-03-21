@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Backstage;
 
 use App\Http\Requests\AnimeRequest;
 use App\Http\Type\EmptyType;
-use App\Models\Anime;
+use App\Models\Website\Anime;
 use App\Http\Controllers\Controller;
-use App\Models\AnimeTag;
-use App\Models\Danmaku;
-use App\Models\Episode;
-use App\Models\Tag;
+use App\Models\Website\AnimeTag;
+use App\Models\Website\Danmaku;
+use App\Models\Website\Episode;
+use App\Models\Website\Tag;
 use Illuminate\Http\Request;
 
 class AnimesController extends Controller

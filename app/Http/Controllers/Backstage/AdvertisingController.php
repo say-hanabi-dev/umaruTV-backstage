@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backstage;
 
 use App\Http\Controllers\Controller;
-use App\Models\Advertising;
+use App\Models\Website\Advertising;
 use Illuminate\Http\Request;
 
 class AdvertisingController extends Controller
@@ -12,7 +12,7 @@ class AdvertisingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -25,7 +25,7 @@ class AdvertisingController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -38,7 +38,7 @@ class AdvertisingController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {

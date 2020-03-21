@@ -87,7 +87,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        {!! \App\Models\Anime::filterView() !!}
+        {!! \App\Models\Website\Anime::filterView() !!}
     </div>
     @foreach($animes as $anime)
         @can('delete-anime')

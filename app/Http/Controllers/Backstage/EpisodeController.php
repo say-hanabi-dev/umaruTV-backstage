@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backstage;
 
 use App\Http\Type\EmptyType;
-use App\Models\Anime;
-use App\Models\Episode;
+use App\Models\Website\Anime;
+use App\Models\Website\Episode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

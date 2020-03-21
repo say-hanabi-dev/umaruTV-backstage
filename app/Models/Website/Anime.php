@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Website;
 
+
+use App\Models\Model;
 
 class Anime extends Model
 {

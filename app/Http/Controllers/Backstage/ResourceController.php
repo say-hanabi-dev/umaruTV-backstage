@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backstage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceRequest;
 use App\Http\Type\EmptyType;
-use App\Models\Episode;
-use App\Models\Resource;
+use App\Models\Website\Episode;
+use App\Models\Website\Resource;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
